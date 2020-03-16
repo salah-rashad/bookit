@@ -8,6 +8,7 @@ import 'package:bookit/screens/login/email_register.dart';
 import 'package:bookit/screens/login/forgot_password.dart';
 import 'package:bookit/screens/login/confirmation.dart';
 import 'package:bookit/screens/login/new_password.dart';
+import 'package:bookit/screens/home/settings.dart';
 
 
 void main(){
@@ -29,14 +30,9 @@ class MyApp extends StatelessWidget {
         '/Confirmation' : (BuildContext context) =>new Confirmation(),
         '/NewPassword' : (BuildContext context) =>new NewPassword(),
         '/ProviderScreen' : (BuildContext context) =>new ProviderScreen(),
-//        '/ProviderInfo' : (BuildContext context) =>new ProviderInfo(),
         '/HomePage' : (BuildContext context) =>new HomePage(),
         '/Profile' : (BuildContext context) =>new Profile(),
-
-
-
-
-
+        '/Settings' : (BuildContext context) =>new Settings(),
 
 
 
