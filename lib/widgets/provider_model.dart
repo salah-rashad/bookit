@@ -1,4 +1,4 @@
-import 'package:bookit/model/provider_activity.dart';
+import 'package:bookit/widgets/provider_activity.dart';
 
 class Provider {
   String email ;

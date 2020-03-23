@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:bookit/model/custom_button.dart';
-import 'package:bookit/model/provider_label.dart';
+import 'package:bookit/widgets/custom_button.dart';
+import 'package:bookit/widgets/provider_label.dart';
 import 'package:bookit/ui/apptheme.dart';
 
 TextEditingController emailController = new TextEditingController();

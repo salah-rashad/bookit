@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:bookit/model/custom_button.dart';
-import 'package:bookit/model/custom_textfield.dart';
+import 'package:bookit/widgets/custom_button.dart';
+import 'package:bookit/widgets/custom_textfield.dart';
 import 'package:bookit/ui/apptheme.dart';
 
 
@@ -38,7 +38,7 @@ class _NewPasswordState extends State<NewPassword> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
 
-                    CustomTextField(
+                    CustomTextFormField(
                       directionality: TextDirection.rtl,
                       hintName: 'كلمة المرور',
                       controller: changedPasswordController,
@@ -49,7 +49,7 @@ class _NewPasswordState extends State<NewPassword> {
                     ),
                     Padding(padding: EdgeInsets.only(bottom: 12)),
 
-                    CustomTextField(
+                    CustomTextFormField(
                       directionality: TextDirection.rtl,
                       hintName: 'تأكيد كلمة المرور',
                       controller: samePasswordController,

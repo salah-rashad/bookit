@@ -1,14 +1,10 @@
+import 'package:bookit/screens/login/authenticate.dart';
+import 'package:bookit/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:bookit/home_Page.dart';
-import 'package:bookit/screens/home/Profile.dart';
-import 'package:bookit/screens/home/provider_screen.dart';
-import 'package:bookit/screens/login/login.dart';
-import 'package:bookit/screens/login/register.dart';
-import 'package:bookit/screens/login/email_register.dart';
-import 'package:bookit/screens/login/forgot_password.dart';
-import 'package:bookit/screens/login/confirmation.dart';
-import 'package:bookit/screens/login/new_password.dart';
-import 'package:bookit/screens/home/settings.dart';
+import 'package:provider/provider.dart';
+
+import 'models/uesr.dart';
 
 
 void main(){
@@ -19,26 +15,31 @@ void main(){
 }
 
 class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      routes: <String , WidgetBuilder>{
-        '/LoginPage' : (BuildContext context) =>new LoginPage(),
-        '/Register' : (BuildContext context) =>new Register(),
-        '/EmailRegister' : (BuildContext context) =>new EmailRegister(),
-        '/ForgotPassword' : (BuildContext context) =>new ForgotPassword(),
-        '/Confirmation' : (BuildContext context) =>new Confirmation(),
-        '/NewPassword' : (BuildContext context) =>new NewPassword(),
-        '/ProviderScreen' : (BuildContext context) =>new ProviderScreen(),
-        '/HomePage' : (BuildContext context) =>new HomePage(),
-        '/Profile' : (BuildContext context) =>new Profile(),
-        '/Settings' : (BuildContext context) =>new Settings(),
-
-
-
-      },
-      home: new LoginPage(),
+    return StreamProvider<User>.value(
+      value: AuthService().user,
+      child: MaterialApp(
+        home: Wrapper(),
+      ),
     );
   }
 }
 
+class Wrapper extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+
+    final user = Provider.of<User>(context);
+    print(user);
+
+    // return either the Home or Authenticate widget
+    if (user == null){
+      return Authenticate();
+    } else {
+      return HomePage();
+    }
+
+  }
+}

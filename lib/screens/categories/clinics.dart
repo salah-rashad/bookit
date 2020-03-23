@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:bookit/model/provider_model.dart';
+import 'package:bookit/widgets/provider_model.dart';
 import 'package:bookit/ui/apptheme.dart';
 
 class Clinics extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:bookit/model/custom_textfield.dart';
-import 'package:bookit/model/custom_button.dart';
+import 'package:bookit/widgets/custom_textfield.dart';
+import 'package:bookit/widgets/custom_button.dart';
 import 'package:bookit/screens/login/forgot_password.dart';
 import 'package:bookit/ui/apptheme.dart';
 
@@ -42,7 +42,7 @@ class _ConfirmationState extends State<Confirmation> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    CustomTextField(
+                    CustomTextFormField(
                       directionality: TextDirection.rtl,
                       hintName: 'كود التأكيد',
                       controller: codeController,

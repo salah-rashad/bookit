@@ -2,25 +2,30 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
-class CustomTextField extends StatelessWidget {
+class CustomTextFormField extends StatelessWidget {
   final String hintName ;
+  final FormFieldValidator validator ;
   final TextEditingController controller ;
   final TextDirection directionality;
   final Color color ;
   final Color color3 ;
   final bool secure ;
+  final ValueChanged<String> change;
 
 
 
 
-  const CustomTextField({Key key, this.hintName,@required this.color3, this.controller,@required this.secure, this.directionality,this.color}) : super(key: key);
+
+  const CustomTextFormField({Key key, this.hintName,@required this.color3, this.controller,@required this.secure, this.directionality,this.color, this.validator, this.change}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: directionality,
       child: Container(
         height: 50,
-        child: TextField(
+        child: TextFormField(
+          validator : validator,
+          onChanged: change,
           obscureText: secure,
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 15),

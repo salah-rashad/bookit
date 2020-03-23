@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:bookit/model/custom_button.dart';
-import 'package:bookit/model/label_button.dart';
+import 'package:bookit/widgets/custom_button.dart';
+import 'package:bookit/widgets/label_button.dart';
 import 'package:bookit/ui/apptheme.dart';
 
 
 class Register extends StatefulWidget {
+
   @override
   _RegisterState createState() => _RegisterState();
 }
