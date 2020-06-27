@@ -40,22 +40,22 @@ class _NewPasswordState extends State<NewPassword> {
 
                     CustomTextFormField(
                       directionality: TextDirection.rtl,
-                      hintName: 'كلمة المرور',
+                      hintText: 'كلمة المرور',
                       controller: changedPasswordController,
                       secure: true,
-                      color: offWhite,
-                      color3: darkBlue,
+                      bgColor: offWhite,
+                      shadowColor: darkBlue,
 
                     ),
                     Padding(padding: EdgeInsets.only(bottom: 12)),
 
                     CustomTextFormField(
                       directionality: TextDirection.rtl,
-                      hintName: 'تأكيد كلمة المرور',
+                      hintText: 'تأكيد كلمة المرور',
                       controller: samePasswordController,
                       secure: true,
-                      color: offWhite,
-                      color3: darkBlue,
+                      bgColor: offWhite,
+                      shadowColor: darkBlue,
                     ),
                     Padding(padding: EdgeInsets.only(bottom: 12)),
                     CustomButton(
@@ -68,10 +68,10 @@ class _NewPasswordState extends State<NewPassword> {
 
 
                       } ,
-                      color: darkBlue,
+                      bgColor: darkBlue,
                       name: 'المتابعة',
-                      color3: darkBlue,
-                      color2: Colors.white,
+                      shadowColor: darkBlue,
+                      textColor: Colors.white,
 
                     ),
 

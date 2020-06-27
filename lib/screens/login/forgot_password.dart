@@ -1,8 +1,9 @@
+import 'package:bookit/ui/apptheme.dart';
+import 'package:bookit/widgets/custom_button.dart';
+import 'package:bookit/widgets/custom_textfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:bookit/widgets/custom_textfield.dart';
-import 'package:bookit/widgets/custom_button.dart';
-import 'package:bookit/ui/apptheme.dart';
+
 
 TextEditingController restoreEmailController = new TextEditingController();
 
@@ -38,10 +39,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     CustomTextFormField(
                       directionality: TextDirection.rtl,
                       controller: restoreEmailController,
-                      hintName: 'الايميل',
+                      hintText: 'الايميل',
                       secure: false,
-                      color: offWhite,
-                      color3: darkBlue,
+                      bgColor: offWhite,
+                      shadowColor: darkBlue,
 
                     ),
                     Padding(padding: EdgeInsets.only(bottom: 12)),
@@ -54,9 +55,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
                       } ,
                       name: 'متابعة',
-                      color: darkBlue,
-                      color2: Colors.white,
-                      color3: darkBlue,
+                      bgColor: darkBlue,
+                      textColor: Colors.white,
+                      shadowColor: darkBlue,
 
 
                     ),
@@ -75,7 +76,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         Navigator.of(context).pushNamed('/LoginPage');
                       } ,
                       name: 'الرجوع <<',
-                      color3: Colors.transparent,
+                      shadowColor: Colors.transparent,
 
                     ),
                   ],

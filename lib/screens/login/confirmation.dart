@@ -44,11 +44,11 @@ class _ConfirmationState extends State<Confirmation> {
                   children: <Widget>[
                     CustomTextFormField(
                       directionality: TextDirection.rtl,
-                      hintName: 'كود التأكيد',
+                      hintText: 'كود التأكيد',
                       controller: codeController,
                       secure: false,
-                      color: offWhite,
-                      color3: darkBlue,
+                      bgColor: offWhite,
+                      shadowColor: darkBlue,
 
                     ),
                     Padding(padding: EdgeInsets.only(bottom: 12)),
@@ -59,9 +59,9 @@ class _ConfirmationState extends State<Confirmation> {
                         });
                         Navigator.of(context).pushNamed('/NewPassword');
                       } ,
-                      color: darkBlue,
-                      color3: darkBlue,
-                      color2: Colors.white,
+                      bgColor: darkBlue,
+                      shadowColor: darkBlue,
+                      textColor: Colors.white,
                       name: 'تأكيد',
                     ),
 
@@ -82,7 +82,7 @@ class _ConfirmationState extends State<Confirmation> {
                           Navigator.of(context).pushNamed('/ForgotPassword');
                         } ,
                         name: 'الرجوع <<',
-                        color3: Colors.transparent,
+                        shadowColor: Colors.transparent,
 
                       ),
                     ],

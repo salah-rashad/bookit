@@ -1,44 +1,55 @@
+import 'package:bookit/ui/apptheme.dart';
 import 'package:flutter/material.dart';
+
 class CustomButton extends StatelessWidget {
-
-  final String name ;
+  final String name;
   final Function onTap;
-  final Color color ;
-  final Color color2 ;
-  final Color color3 ;
+  final Color bgColor;
+  final Color textColor;
+  final Color shadowColor;
+  final bool isBorderd;
 
-
-
-  const CustomButton({Key key, this.name,this.onTap,this.color,this.color2,
-    @required this.color3}) : super(key: key);
+  const CustomButton({
+    Key key,
+    this.name,
+    this.onTap,
+    this.bgColor,
+    this.textColor,
+    this.shadowColor,
+    this.isBorderd = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(30),
-
-
       onTap: onTap,
-
       child: Container(
         height: 50,
         child: Center(
-          child: Text(name,style: TextStyle(fontSize: 15,fontFamily: 'font1',color: color2),),
+          child: Text(
+            name,
+            style: AppTextStyle(color: textColor, size: 18.0).bold(),
+          ),
         ),
         decoration: BoxDecoration(
-            color: color,
+            color: isBorderd ? Colors.transparent : bgColor,
             borderRadius: BorderRadius.circular(30),
+            border: isBorderd ? Border.all(color: grey1) : null,
             boxShadow: [
-              BoxShadow(
-                  color:  color3,
-                  blurRadius:30,
-                  offset: Offset(0, 4),
-                  spreadRadius: -15
-              )
-            ]
-        ),
-
+              getShadow(),
+            ]),
       ),
     );
+  }
+
+  BoxShadow getShadow() {
+    if (isBorderd)
+      return BoxShadow(color: Colors.transparent);
+    else
+      return BoxShadow(
+          color: shadowColor.withOpacity(0.50),
+          blurRadius: 20,
+          offset: Offset(0, 4));
   }
 }

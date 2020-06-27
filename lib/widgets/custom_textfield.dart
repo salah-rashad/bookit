@@ -1,22 +1,30 @@
+import 'package:bookit/ui/apptheme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 class CustomTextFormField extends StatelessWidget {
-  final String hintName ;
-  final FormFieldValidator validator ;
-  final TextEditingController controller ;
+  final String hintText;
+  final FormFieldValidator validator;
+  final TextEditingController controller;
   final TextDirection directionality;
-  final Color color ;
-  final Color color3 ;
-  final bool secure ;
+  final TextInputType textInputType;
+  final Color bgColor;
+  final Color shadowColor;
+  final bool secure;
   final ValueChanged<String> change;
 
-
-
-
-
-  const CustomTextFormField({Key key, this.hintName,@required this.color3, this.controller,@required this.secure, this.directionality,this.color, this.validator, this.change}) : super(key: key);
+  const CustomTextFormField(
+      {Key key,
+      this.hintText,
+      @required this.shadowColor,
+      this.controller,
+      @required this.secure,
+      this.directionality,
+      this.textInputType,
+      this.bgColor,
+      this.validator,
+      this.change})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -24,34 +32,30 @@ class CustomTextFormField extends StatelessWidget {
       child: Container(
         height: 50,
         child: TextFormField(
-          validator : validator,
+          validator: validator,
           onChanged: change,
           obscureText: secure,
+          keyboardType: textInputType,
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 15),
+          style: AppTextStyle(color: darkBlue, size: 18.0).bold(),
           maxLines: 1,
-          decoration:
-          InputDecoration(
+          decoration: InputDecoration(
               border: InputBorder.none,
-              hintText: (hintName)
-          ),
+              hintText: (hintText),
+              hintStyle: AppTextStyle(color: grey1, size: 18.0).bold()),
           controller: controller,
         ),
         decoration: BoxDecoration(
-            color: color,
+            color: bgColor,
             borderRadius: BorderRadius.circular(30),
             boxShadow: [
               BoxShadow(
-                  color:  color3,
-                  blurRadius:40,
-                  offset: Offset(0, 4),
-                  spreadRadius: -15
+                color: shadowColor.withOpacity(0.16),
+                blurRadius: 20,
+                offset: Offset(0, 4),
               )
-            ]
-        ),
+            ]),
       ),
     );
   }
 }
-
-

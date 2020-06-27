@@ -1,35 +1,21 @@
-import 'package:bookit/services/auth_service.dart';
-import 'package:bookit/widgets/loading.dart';
+import 'package:bookit/ui/apptheme.dart';
+import 'package:bookit/viewmodels/login_view_model.dart';
+import 'package:bookit/widgets/circular_button.dart';
+import 'package:bookit/widgets/custom_button.dart';
+import 'package:bookit/widgets/custom_textfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:bookit/widgets/custom_textfield.dart';
-import 'package:bookit/widgets/circular_button.dart';
-import 'package:bookit/widgets/custom_button.dart';
-import 'package:bookit/ui/apptheme.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider_architecture/_viewmodel_provider.dart';
 
+class LoginPage extends StatelessWidget {
+  // final Function toggleView;
+  // LoginPage({this.toggleView});
 
-TextEditingController emailController = new TextEditingController();
-TextEditingController passwordController = new TextEditingController();
+  TextEditingController emailController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
 
-class LoginPage extends StatefulWidget {
-  final Function toggleView;
-  LoginPage({this.toggleView});
-
-  @override
-  _LoginPageState createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-
-  GoogleSignIn _googleSignIn = GoogleSignIn(
-    scopes: <String>[
-      'email',
-      'https://www.googleapis.com/auth/contacts.readonly',
-    ],
-  );
-  final AuthService _auth = AuthService();
+  // final GoogleSignIn _googlSignIn = new GoogleSignIn();
   final _formKey = GlobalKey<FormState>();
   String error = '';
   bool loading = false;
@@ -40,147 +26,162 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return loading
-        ? Loading()
-        : Scaffold(
-            resizeToAvoidBottomPadding: false,
-            body: Container(
-              padding: EdgeInsets.only(right: 32, left: 32),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: <Widget>[
-                    Expanded(
+    return ViewModelProvider<LoginViewModel>.withConsumer(
+        viewModelBuilder: () => LoginViewModel(),
+        builder: (context, model, child) {
+          return Scaffold(
+              resizeToAvoidBottomInset: false,
+              body: Container(
+                padding: EdgeInsets.only(right: 32, left: 32),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: <Widget>[
+                      Expanded(
                         flex: 1,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                        child: Stack(
                           children: <Widget>[
-                            ClipRRect(
-                              child: Image.asset(
-                                'images/logo2.png',
-                                fit: BoxFit.fill,
-                                height: 150,
-                                width: 150,
+                            Align(
+                              alignment: Alignment.center,
+                              child: ClipRRect(
+                                child: Image.asset(
+                                  'images/logo2.png',
+                                  fit: BoxFit.fill,
+                                  height: 150,
+                                  width: 150,
+                                ),
+                                borderRadius: BorderRadius.circular(50),
                               ),
-                              borderRadius: BorderRadius.circular(50),
                             ),
-                            Text('تسجيل الدخول',
-                                style: TextStyle(
-                                    fontSize: 24, fontFamily: 'font1'))
+                            Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Text(
+                                'تسجيل الدخول',
+                                style: AppTextStyle(color: darkBlue, size: 22.0)
+                                    .bold(),
+                              ),
+                            )
                           ],
-                        )),
-                    Expanded(
-                        flex: 1,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            CustomTextFormField(
-                              directionality: TextDirection.rtl,
-                              controller: emailController,
-                              hintName: 'الايميل',
-                              color: offWhite,
-                              secure: false,
-                              color3: darkBlue,
-                            ),
-                            Padding(padding: EdgeInsets.only(bottom: 12)),
-                            CustomTextFormField(
-                              directionality: TextDirection.rtl,
-                              controller: passwordController,
-                              hintName: 'كلمة المرور',
-                              color: offWhite,
-                              secure: true,
-                              color3: darkBlue,
-                              validator: (val) =>
-                                  val.isEmpty ? 'Enter an email' : null,
-                              change: (val) {
-                                setState(() => email = val);
-                              },
-                            ),
-                            Padding(padding: EdgeInsets.only(bottom: 12)),
-                            Row(
+                        ),
+                      ),
+                      Expanded(
+                          flex: 1,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                              CustomTextFormField(
+                                directionality: TextDirection.ltr,
+                                controller: emailController,
+                                hintText: 'الايميل',
+                                bgColor: offWhite,
+                                textInputType: TextInputType.emailAddress,
+                                secure: false,
+                                shadowColor: darkBlue,
+                              ),
+                              Padding(padding: EdgeInsets.only(bottom: 12)),
+                              CustomTextFormField(
+                                directionality: TextDirection.ltr,
+                                controller: passwordController,
+                                hintText: 'كلمة المرور',
+                                bgColor: offWhite,
+                                textInputType: TextInputType.visiblePassword,
+                                secure: true,
+                                shadowColor: darkBlue,
+                                validator: (val) =>
+                                    val.isEmpty ? 'Enter an email' : null,
+                              ),
+                              Padding(padding: EdgeInsets.only(bottom: 12)),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Row(
+                                    children: <Widget>[
+                                      CircularButton(
+                                        onTap: () {
+                                          Navigator.of(context)
+                                              .pushNamed('/HomePage');
+                                        },
+                                        shadowColor: grey1,
+                                        bgColor: white,
+                                        image: Image.asset(
+                                          'images/f_white.png',
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 16,
+                                      ),
+                                      CircularButton(
+                                        onTap: () {
+                                          Navigator.of(context)
+                                              .pushNamed('/HomePage');
+                                        },
+                                        shadowColor: darkBlue,
+                                        bgColor: white,
+                                        image: Image.asset(
+                                          'images/google.png',
+                                          fit: BoxFit.scaleDown,
+                                          scale: 1.5,
+                                          height: 30,
+                                          width: 30,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  FlatButton(
+                                    onPressed: () {
+                                      Navigator.of(context)
+                                          .pushNamed('/ForgotPassword');
+                                    },
+                                    child: Text(
+                                      'نسيت كلمة المرور ؟',
+                                      style: AppTextStyle(
+                                        color: lightBlue,
+                                        size: 14.0,
+                                      ).bold().apply(
+                                          decoration: TextDecoration.underline),
+                                    ),
+                                    color: Colors.transparent,
+                                  ),
+                                ],
+                              ),
+                              Padding(padding: EdgeInsets.only(bottom: 12))
+                            ],
+                          )),
+                      Expanded(
+                          flex: 1,
+                          child: Container(
+                            padding: EdgeInsets.only(bottom: 32),
+                            child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    CircularButton(
-                                      onTap: () {
-                                        Navigator.of(context)
-                                            .pushNamed('/HomePage');
-                                      },
-                                      color3: darkBlue,
-                                      color: darkBlue,
-                                      image: Image.asset('images/google.png'),
-                                    ),
-                                    SizedBox(
-                                      width: 6,
-                                    ),
-                                    CircularButton(
-                                      onTap: () {
-                                        Navigator.of(context)
-                                            .pushNamed('/HomePage');
-                                      },
-                                      color3: grey1,
-                                      color: darkBlue,
-                                      image: Image.asset(
-                                        'images/f_white.png',
-                                        fit: BoxFit.fill,
-                                      ),
-                                    ),
-                                  ],
-                                ),
                                 CustomButton(
                                   onTap: () {
-                                    Navigator.of(context)
-                                        .pushNamed('/ForgotPassword');
+                                    model.login(
+                                      email: emailController.text,
+                                      password: passwordController.text,
+                                    );
                                   },
-                                  name: ('نسيت كلمة المرور ؟'),
-                                  color: Colors.transparent,
-                                  color3: Colors.transparent,
+                                  name: 'الدخول',
+                                  bgColor: awesome,
+                                  shadowColor: awesome,
+                                ),
+                                CustomButton(
+                                  name: 'انشاء حساب جديد',
+                                  onTap: () {
+                                    model.navigateToSignUp();
+                                  },
+                                  isBorderd: true,
+                                  textColor: lightBlue,
                                 ),
                               ],
                             ),
-                            Padding(padding: EdgeInsets.only(bottom: 12))
-                          ],
-                        )),
-                    Expanded(
-                        flex: 1,
-                        child: Container(
-                          padding: EdgeInsets.only(bottom: 32),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              CustomButton(
-                                onTap: () async {
-                                  if (_formKey.currentState.validate()) {
-                                    setState(() => loading = true);
-                                    dynamic result = await _auth
-                                        .signInWithEmailAndPassword(
-                                            email, password);
-                                    if (result == null) {
-                                      setState(() {
-                                        loading = false;
-                                        error = 'Please supply a valid email';
-                                      });
-                                    }
-                                  }
-                                },
-                                name: 'الدخول',
-                                color: awesome,
-                                color3: darkBlue,
-                              ),
-                              CustomButton(
-                                name: 'انشاء حساب جديد',
-                                onTap: () => widget.toggleView(),
-                                color: grey1,
-                                color3: darkBlue,
-                                color2: darkBlue,
-                              ),
-                            ],
-                          ),
-                        )),
-                  ],
+                          )),
+                    ],
+                  ),
                 ),
-              ),
-            ));
+              ));
+        });
   }
 }
